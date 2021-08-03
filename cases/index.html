@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="nyt-covid" />
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Data source for COVID-19 Cases | nyt-covid</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Data source for COVID-19 Cases" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This website visualizes data from New York Times’ COVID-19 repository located at https://github.com/nytimes/covid-19-data" />
+<meta property="og:description" content="This website visualizes data from New York Times’ COVID-19 repository located at https://github.com/nytimes/covid-19-data" />
+<link rel="canonical" href="/cases/" />
+<meta property="og:url" content="/cases/" />
+<meta property="og:site_name" content="nyt-covid" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data source for COVID-19 Cases" />
+<script type="application/ld+json">
+{"url":"/cases/","headline":"Data source for COVID-19 Cases","description":"This website visualizes data from New York Times’ COVID-19 repository located at https://github.com/nytimes/covid-19-data","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="/assets/css/open-color.css">
+  <link rel="stylesheet" href="/assets/css/hydure.css">
+
+  <script async src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+  
+
+</head>
+
+
+  <body>
+    <div id="layout" class="pure-g">
+      
+      
+      <div class="sidebar pure-u-1 pure-u-md-1-4" style="background-image: url(https://cdn.jsdelivr.net/gh/zivong/jekyll-theme-hydure@master/cover.jpg);">
+        <div class="sidebar-shield">
+          <header class="header">
+  <a class="brand-title" href="/">nyt-covid</a>
+  <p class="brand-tagline"></p>
+
+  
+    <nav class="nav pure-menu">
+      <ul class="pure-menu-list">
+      
+        <li class="nav-item pure-menu-item">
+          <a href="/" class="pure-menu-link ">
+            Home
+          </a>
+        </li>
+      
+        <li class="nav-item pure-menu-item">
+          <a href="/about/" class="pure-menu-link ">
+            About
+          </a>
+        </li>
+      
+        <li class="nav-item pure-menu-item">
+          <a href="/cases/" class="pure-menu-link current">
+            Cases
+          </a>
+        </li>
+      
+        <li class="nav-item pure-menu-item">
+          <a href="/deaths/" class="pure-menu-link ">
+            Deaths
+          </a>
+        </li>
+      
+        <li class="nav-item pure-menu-item">
+          <a href="/prisons/" class="pure-menu-link ">
+            Prisons
+          </a>
+        </li>
+      
+        <li class="nav-item pure-menu-item">
+          <a href="/colleges/" class="pure-menu-link ">
+            Colleges
+          </a>
+        </li>
+      
+        <li class="nav-item pure-menu-item">
+          <a href="/masks/" class="pure-menu-link ">
+            Masks
+          </a>
+        </li>
+      
+      </ul>
+    </nav>
+  
+
+  
+    <div class="social pure-menu pure-menu-horizontal">
+      <ul class="social-list pure-menu-list">
+        
+          <li class="social-item pure-menu-item">
+            <a class="pure-menu-link pure-button" href="mailto:wyoinbre@gmail.com" target="_blank">
+              <i class="fas fa-envelope" title="Email"></i>
+            </a>
+          </li>
+        
+          <li class="social-item pure-menu-item">
+            <a class="pure-menu-link pure-button" href="https://twitter.com/wyoibc" target="_blank">
+              <i class="fab fa-twitter" title="Twitter"></i>
+            </a>
+          </li>
+        
+          <li class="social-item pure-menu-item">
+            <a class="pure-menu-link pure-button" href="https://github.com/wyoibc" target="_blank">
+              <i class="fab fa-github" title="GitHub"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  
+</header>
+
+        </div>
+      </div>
+      <div class="content pure-u-1 pure-u-md-3-4">
+        <div class="main">
+          <article class="post">
+  
+  <h1 class="post-title">Data source for COVID-19 Cases</h1>
+  <div class="post-meta">
+    <time datetime="" itemprop="datePublished">
+      
+    </time></div>
+  
+  <h2 id="1-data-organization">1. Data Organization</h2>
+
+<ul>
+  <li>
+    <p>This data is organized as follows:</p>
+
+    <ul>
+      <li>
+        <p>County level data located in <a href="nyt/us-counties.csv">us-counties.csv</a></p>
+      </li>
+      <li>
+        <p>State level data located in <a href="nyt/us-states.csv">us-states.csv</a></p>
+      </li>
+      <li>
+        <p>National level data located in <a href="nyt/us.csv">us.csv</a></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-preliminary-look-at-the-data">2. Preliminary Look at the Data</h2>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+
+</span><span class="n">counties</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"nyt/us-counties.csv"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">states</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"nyt/us-states.csv"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">us</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"nyt/us.csv"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="21-county-level-data">2.1 County level data</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># A tibble: 1,579,428 x 6</span><span class="w">
+   </span><span class="n">date</span><span class="w">       </span><span class="n">county</span><span class="w">      </span><span class="n">state</span><span class="w">      </span><span class="n">fips</span><span class="w">  </span><span class="n">cases</span><span class="w"> </span><span class="n">deaths</span><span class="w">
+   </span><span class="o">&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="w">     </span><span class="o">&lt;</span><span class="n">chr</span><span class="o">&gt;</span><span class="w">       </span><span class="o">&lt;</span><span class="n">chr</span><span class="o">&gt;</span><span class="w">      </span><span class="o">&lt;</span><span class="n">chr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span><span class="w">  </span><span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span><span class="w">
+ </span><span class="m">1</span><span class="w"> </span><span class="m">2020-01-21</span><span class="w"> </span><span class="n">Snohomish</span><span class="w">   </span><span class="n">Washington</span><span class="w"> </span><span class="m">53061</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">2</span><span class="w"> </span><span class="m">2020-01-22</span><span class="w"> </span><span class="n">Snohomish</span><span class="w">   </span><span class="n">Washington</span><span class="w"> </span><span class="m">53061</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">3</span><span class="w"> </span><span class="m">2020-01-23</span><span class="w"> </span><span class="n">Snohomish</span><span class="w">   </span><span class="n">Washington</span><span class="w"> </span><span class="m">53061</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">4</span><span class="w"> </span><span class="m">2020-01-24</span><span class="w"> </span><span class="n">Cook</span><span class="w">        </span><span class="n">Illinois</span><span class="w">   </span><span class="m">17031</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">5</span><span class="w"> </span><span class="m">2020-01-24</span><span class="w"> </span><span class="n">Snohomish</span><span class="w">   </span><span class="n">Washington</span><span class="w"> </span><span class="m">53061</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">6</span><span class="w"> </span><span class="m">2020-01-25</span><span class="w"> </span><span class="n">Orange</span><span class="w">      </span><span class="n">California</span><span class="w"> </span><span class="m">06059</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">7</span><span class="w"> </span><span class="m">2020-01-25</span><span class="w"> </span><span class="n">Cook</span><span class="w">        </span><span class="n">Illinois</span><span class="w">   </span><span class="m">17031</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">8</span><span class="w"> </span><span class="m">2020-01-25</span><span class="w"> </span><span class="n">Snohomish</span><span class="w">   </span><span class="n">Washington</span><span class="w"> </span><span class="m">53061</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">9</span><span class="w"> </span><span class="m">2020-01-26</span><span class="w"> </span><span class="n">Maricopa</span><span class="w">    </span><span class="n">Arizona</span><span class="w">    </span><span class="m">04013</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+</span><span class="m">10</span><span class="w"> </span><span class="m">2020-01-26</span><span class="w"> </span><span class="n">Los</span><span class="w"> </span><span class="n">Angeles</span><span class="w"> </span><span class="n">California</span><span class="w"> </span><span class="m">06037</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+</span><span class="c1"># … with 1,579,418 more rows</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="22-state-level-data">2.2 State level data</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># A tibble: 28,504 x 5</span><span class="w">
+   </span><span class="n">date</span><span class="w">       </span><span class="n">state</span><span class="w">      </span><span class="n">fips</span><span class="w">  </span><span class="n">cases</span><span class="w"> </span><span class="n">deaths</span><span class="w">
+   </span><span class="o">&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="w">     </span><span class="o">&lt;</span><span class="n">chr</span><span class="o">&gt;</span><span class="w">      </span><span class="o">&lt;</span><span class="n">chr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span><span class="w">  </span><span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span><span class="w">
+ </span><span class="m">1</span><span class="w"> </span><span class="m">2020-01-21</span><span class="w"> </span><span class="n">Washington</span><span class="w"> </span><span class="m">53</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">2</span><span class="w"> </span><span class="m">2020-01-22</span><span class="w"> </span><span class="n">Washington</span><span class="w"> </span><span class="m">53</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">3</span><span class="w"> </span><span class="m">2020-01-23</span><span class="w"> </span><span class="n">Washington</span><span class="w"> </span><span class="m">53</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">4</span><span class="w"> </span><span class="m">2020-01-24</span><span class="w"> </span><span class="n">Illinois</span><span class="w">   </span><span class="m">17</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">5</span><span class="w"> </span><span class="m">2020-01-24</span><span class="w"> </span><span class="n">Washington</span><span class="w"> </span><span class="m">53</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">6</span><span class="w"> </span><span class="m">2020-01-25</span><span class="w"> </span><span class="n">California</span><span class="w"> </span><span class="m">06</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">7</span><span class="w"> </span><span class="m">2020-01-25</span><span class="w"> </span><span class="n">Illinois</span><span class="w">   </span><span class="m">17</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">8</span><span class="w"> </span><span class="m">2020-01-25</span><span class="w"> </span><span class="n">Washington</span><span class="w"> </span><span class="m">53</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">9</span><span class="w"> </span><span class="m">2020-01-26</span><span class="w"> </span><span class="n">Arizona</span><span class="w">    </span><span class="m">04</span><span class="w">        </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+</span><span class="m">10</span><span class="w"> </span><span class="m">2020-01-26</span><span class="w"> </span><span class="n">California</span><span class="w"> </span><span class="m">06</span><span class="w">        </span><span class="m">2</span><span class="w">      </span><span class="m">0</span><span class="w">
+</span><span class="c1"># … with 28,494 more rows</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="23-national-level-data">2.3 National level data</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># A tibble: 560 x 3</span><span class="w">
+   </span><span class="n">date</span><span class="w">       </span><span class="n">cases</span><span class="w"> </span><span class="n">deaths</span><span class="w">
+   </span><span class="o">&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="w">     </span><span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span><span class="w">  </span><span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span><span class="w">
+ </span><span class="m">1</span><span class="w"> </span><span class="m">2020-01-21</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">2</span><span class="w"> </span><span class="m">2020-01-22</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">3</span><span class="w"> </span><span class="m">2020-01-23</span><span class="w">     </span><span class="m">1</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">4</span><span class="w"> </span><span class="m">2020-01-24</span><span class="w">     </span><span class="m">2</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">5</span><span class="w"> </span><span class="m">2020-01-25</span><span class="w">     </span><span class="m">3</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">6</span><span class="w"> </span><span class="m">2020-01-26</span><span class="w">     </span><span class="m">5</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">7</span><span class="w"> </span><span class="m">2020-01-27</span><span class="w">     </span><span class="m">5</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">8</span><span class="w"> </span><span class="m">2020-01-28</span><span class="w">     </span><span class="m">5</span><span class="w">      </span><span class="m">0</span><span class="w">
+ </span><span class="m">9</span><span class="w"> </span><span class="m">2020-01-29</span><span class="w">     </span><span class="m">5</span><span class="w">      </span><span class="m">0</span><span class="w">
+</span><span class="m">10</span><span class="w"> </span><span class="m">2020-01-30</span><span class="w">     </span><span class="m">6</span><span class="w">      </span><span class="m">0</span><span class="w">
+</span><span class="c1"># … with 550 more rows</span><span class="w">
+</span></code></pre></div></div>
+
+
+  
+
+  
+</article>
+
+        </div>
+        <footer class="footer pure-g">
+  <div class="pure-u-1 pure-u-md-1-2">
+    <small>
+      &copy;&nbsp;<time datetime="2021-08-03T08:52:58-06:00">2021</time>. All right reserved.
+    </small>
+  </div>
+
+  <div class="pure-u-1 pure-u-md-1-2">
+    <small>
+      Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> & <a href="https://github.com/zivong/jekyll-theme-hydure" target="_blank">Hydure</a>
+    </small>
+  </div>
+</footer>
+
+      </div>
+    </div>
+
+    
+
+    
+  </body>
+</html>
